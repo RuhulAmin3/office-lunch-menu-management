@@ -1,10 +1,9 @@
-
-import './App.css'
+import Login from './pages/Login'
 
 function App() {
   return (
     <>
-      <h3>In the name of Allah</h3>
+      <Login />
     </>
   )
 }
