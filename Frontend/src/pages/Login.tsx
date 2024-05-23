@@ -9,6 +9,7 @@ const Login = () => {
                 backgroundImage:
                     'url("https://safewheel.sgp1.cdn.digitaloceanspaces.com/others/engin-akyurt-HEMIBJ8QQuA-unsplash%20(3).jpg")',
                 height: "100vh",
+                width: "100vw",
                 backgroundRepeat: "no-repeat",
                 backgroundSize: "cover"
             }}
