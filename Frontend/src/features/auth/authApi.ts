@@ -20,7 +20,24 @@ export const authApi = baseApi.injectEndpoints({
         }
       },
     }),
+
+    login: builder.mutation({
+      query: (data) => ({
+        url: "/auth/login",
+        method: "POST",
+        body: data,
+      }),
+
+      async onQueryStarted(_, { queryFulfilled }) {
+        try {
+          const result = await queryFulfilled;
+          setIntoLocalStorage("accessToken", result?.data?.data?.token);
+        } catch (err) {
+          console.log("err", err);
+        }
+      },
+    }),
   }),
 });
 
-export const { useRegisterMutation } = authApi;
+export const { useRegisterMutation, useLoginMutation } = authApi;

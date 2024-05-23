@@ -1,8 +1,32 @@
-import { Button, Card, Flex } from "antd"
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { Button, Card, Flex, message } from "antd"
 import Form from "../components/Forms/Form"
 import FormInput from "../components/Forms/FormInput"
+import { SubmitHandler } from "react-hook-form"
+import { useLoginMutation } from "../features/auth/authApi"
+import { useEffect } from "react"
 
 const Login = () => {
+
+    const [login, { data, isLoading, isSuccess, isError }] =
+        useLoginMutation();
+
+    const onSubmit: SubmitHandler<any> = async (data: any) => {
+        try {
+            login(data);
+        } catch (err) {
+            console.log("err", err);
+        }
+    };
+
+    useEffect(() => {
+        if (isSuccess && data) {
+            message.success("login successful")
+        }
+        if (isError) message.error("failed to login");
+    }, [data, isSuccess, isError])
+
+
     return (
         <div
             style={{
@@ -22,15 +46,14 @@ const Login = () => {
                     minHeight: "96vh",
                 }}
             >
-                <Form submitHandler={() => { }}>
+                <Form submitHandler={onSubmit}>
                     <Card style={{ width: 400 }}>
-                        {/* <img src={Logo} alt="" style={{ width: "120px" }} /> */}
                         <Flex vertical gap="large">
                             <FormInput name="email" label="Email" required placeholder="Enter Your Email" type="email" />
                             <FormInput name="password" label="Password" required placeholder="Enter your password" type="password" />
                             <Button
-                                // loading={loading}
-                                // disabled={loading}
+                                loading={isLoading}
+                                disabled={isLoading}
                                 type="primary"
                                 htmlType="submit"
                                 block
