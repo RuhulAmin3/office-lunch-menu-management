@@ -22,16 +22,25 @@ const createLunchMenu = async (
   };
 };
 
-const getAllLunchMenu = async (): Promise<{ result: LunchMenu[] }> => {
-  const allLunchMenu = await prisma.lunchMenu.findMany({});
+const getAllLunchMenu = async (
+  date: string
+): Promise<{ result: LunchMenu[]; total: number }> => {
+  const queryDate = new Date(date);
 
-  return { result: allLunchMenu };
+  const query = { date: queryDate };
+
+  const allLunchMenu = await prisma.lunchMenu.findMany({
+    where: query,
+  });
+  const total = await prisma.lunchMenu.count({ where: query });
+
+  return { result: allLunchMenu, total };
 };
 
 const updateLunchMenu = async (
   id: string,
   payload: Partial<LunchMenu>
-): Promise<{ result: LunchMenu }> => {
+): Promise<LunchMenu> => {
   const isExist = await prisma.lunchMenu.findUnique({
     where: {
       id: id,
@@ -48,7 +57,7 @@ const updateLunchMenu = async (
     data: payload,
   });
 
-  return { result: updatedResult };
+  return updatedResult;
 };
 
 export const lunchMenuService = {

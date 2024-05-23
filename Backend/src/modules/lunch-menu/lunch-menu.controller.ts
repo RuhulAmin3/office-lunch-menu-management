@@ -26,14 +26,16 @@ const getAllLunchMenu = async (
   res: Response,
   next: NextFunction
 ) => {
+  const { date } = req.query || {};
+
   try {
-    const result = await lunchMenuService.getAllLunchMenu();
+    const result = await lunchMenuService.getAllLunchMenu(date as string);
 
     res.status(httpStatus.OK).json({
       success: true,
       message: "retrieved all lunch menu successfully",
       statusCode: httpStatus.OK,
-      data: result.result,
+      data: result,
     });
   } catch (err) {
     next(err);
@@ -53,7 +55,7 @@ const updateLunchMenu = async (
       success: true,
       message: "update lunch menu successfully",
       statusCode: httpStatus.OK,
-      data: result.result,
+      data: result,
     });
   } catch (err) {
     next(err);
