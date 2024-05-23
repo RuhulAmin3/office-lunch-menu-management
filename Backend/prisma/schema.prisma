@@ -37,16 +37,14 @@ model LunchMenu {
 }
 
 model SelectMenu {
-  id String @id @default(uuid())
-
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
-
+  id          String    @id @default(uuid())
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String
   lunchMenu   LunchMenu @relation(fields: [lunchMenuId], references: [id])
   lunchMenuId String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  date        DateTime
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
   @@map("select_menu")
 }
