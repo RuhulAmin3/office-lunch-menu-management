@@ -8,7 +8,7 @@ const createLunchMenu = async (
   next: NextFunction
 ) => {
   try {
-    const result = await lunchMenuService.createLunchMenu(req.body);
+    const result = await lunchMenuService.createLunchMenu(req.body, req.file!);
 
     res.status(httpStatus.CREATED).json({
       success: true,
