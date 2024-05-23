@@ -8,7 +8,7 @@ import handleValidationError from "../errors/validation-error";
 import { ErrorHandler, handleZodError } from "../errors";
 import handleClientError from "../errors/client-error";
 
-const globalErrorHandler: ErrorRequestHandler = (
+export const globalErrorHandler: ErrorRequestHandler = (
   err,
   req: Request,
   res: Response,
@@ -67,5 +67,3 @@ const globalErrorHandler: ErrorRequestHandler = (
     stack: config.env !== "production" ? err?.stack : undefined,
   });
 };
-
-export default globalErrorHandler;
