@@ -4,27 +4,41 @@ import Register from "../pages/Register";
 import LunchmenuList from "../pages/LunchmenuList";
 import CreateLunchmenu from "../pages/CreateLunchmenu";
 import SelectmenuList from "../pages/SelectmenuList";
+import NotFound from "../pages/NotFound";
+import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
     {
-        path: "/lunch-menu",
-        element: <LunchmenuList />
+        path: "/lunch-menus",
+        element: <PrivateRoute>
+            <LunchmenuList />
+        </PrivateRoute>
     },
     {
         path: "/login",
-        element: <Login />
+        element: <PublicRoute>
+            <Login />
+        </PublicRoute>
     },
     {
         path: "/register",
-        element: <Register />
+        element: <PublicRoute>
+            <Register />
+        </PublicRoute>
     },
     {
         path: "/create-lunch-menu",
-        element: <CreateLunchmenu />
+        element: <AdminRoute><CreateLunchmenu /></AdminRoute>
     },
     {
         path: "/select-menus",
-        element: <SelectmenuList />
+        element: <AdminRoute><SelectmenuList /></AdminRoute>
+    },
+    {
+        path: "*",
+        element: <NotFound />
     }
 
 ])

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Card, Flex, message } from "antd"
 import Form from "../components/Forms/Form"
@@ -7,9 +8,10 @@ import { useRegisterMutation } from "../features/auth/auth.api"
 import { useEffect } from "react"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { registerValidator } from "../features/auth/auth.validator"
+import { useNavigate } from "react-router-dom"
 
 const Register = () => {
-
+    const navigate = useNavigate();
     const [register, { data, isLoading, isSuccess, isError, error }] =
         useRegisterMutation();
 
@@ -23,8 +25,10 @@ const Register = () => {
 
     useEffect(() => {
         if (isSuccess && data) {
-            message.success("register successful")
+            message.success("register successful");
+            navigate("/lunch-menus");
         }
+
         if (isError) {
             console.log("error", error);
             message.error((error as any)?.data?.message);

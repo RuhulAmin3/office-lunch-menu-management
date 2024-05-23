@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getIntoLocalStorage } from "../common/utils";
-import { TOKEN_KEY } from "../common/utils/constants";
+import { TOKEN_KEY } from "../common/constants";
 
 export const baseApi = createApi({
   reducerPath: "api",
