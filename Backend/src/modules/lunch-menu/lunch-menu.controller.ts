@@ -28,13 +28,22 @@ const getAllLunchMenu = async (
 ) => {
   const { date } = req.query || {};
 
+  const { page = 1, limit = 10 } = req.query || {};
+
   try {
-    const result = await lunchMenuService.getAllLunchMenu(date as string);
+    const { result, meta } = await lunchMenuService.getAllLunchMenu(
+      date as string,
+      {
+        page: Number(page),
+        limit: Number(limit),
+      }
+    );
 
     res.status(httpStatus.OK).json({
       success: true,
       message: "retrieved all lunch menu successfully",
       statusCode: httpStatus.OK,
+      meta,
       data: result,
     });
   } catch (err) {

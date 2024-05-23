@@ -23,18 +23,29 @@ const createLunchMenu = async (
 };
 
 const getAllLunchMenu = async (
-  date: string
-): Promise<{ result: LunchMenu[]; total: number }> => {
+  date: string,
+  paginationOptions: { page: number; limit: number }
+): Promise<{
+  result: LunchMenu[];
+  meta: { page: number; limit: number; total: number };
+}> => {
+  const { page, limit } = paginationOptions;
+
   const queryDate = new Date(date);
 
   const query = { date: queryDate };
 
+  const skip = (page - 1) * limit;
+
   const allLunchMenu = await prisma.lunchMenu.findMany({
     where: query,
+    take: limit,
+    skip,
   });
+
   const total = await prisma.lunchMenu.count({ where: query });
 
-  return { result: allLunchMenu, total };
+  return { result: allLunchMenu, meta: { page, limit, total } };
 };
 
 const updateLunchMenu = async (

@@ -13,7 +13,11 @@ router.post(
   lunchMenuController.createLunchMenu
 );
 
-router.get("/", authenticate(ROLE.Admin), lunchMenuController.getAllLunchMenu);
+router.get(
+  "/",
+  authenticate(ROLE.Admin, ROLE.Employee),
+  lunchMenuController.getAllLunchMenu
+);
 
 router.patch(
   "/:id",
