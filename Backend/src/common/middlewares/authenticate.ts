@@ -6,7 +6,7 @@ import { Jwt } from "../jwt";
 import config from "../config";
 import { Secret } from "jsonwebtoken";
 
-export const authenticate = async (...roles: ROLE[]) => {
+export const authenticate = (...roles: ROLE[]) => {
   return async (req: Request, res: Response, next: NextFunction) => {
     const token = req.headers.authorization?.split(" ")[1];
     try {
@@ -22,6 +22,7 @@ export const authenticate = async (...roles: ROLE[]) => {
       if (roles.length && !roles.includes(verifiedToken.role)) {
         throw new ErrorHandler(httpStatus.FORBIDDEN, "forbidden user");
       }
+      next();
     } catch (error) {
       next(error);
     }
