@@ -33,6 +33,7 @@ const loginSchema = z.object({
     }),
   }),
 });
+
 export const authValidation = {
   registerSchema,
   loginSchema,
