@@ -4,4 +4,4 @@ const CreateLunchmenu = () => {
     )
 }
 
-export default CreateLunchmenu
+export default CreateLunchmenu;

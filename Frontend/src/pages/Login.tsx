@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Card, Flex, message } from "antd"
 import Form from "../components/Forms/Form"
@@ -25,11 +26,10 @@ const Login = () => {
     useEffect(() => {
         if (isSuccess && data) {
             message.success("register successful")
-            navigate("/lunch-menus");
+            navigate("/");
         }
 
         if (isError) {
-            console.log("error", error);
             message.error((error as any)?.data?.message);
         }
     }, [data, isSuccess, isError, error])

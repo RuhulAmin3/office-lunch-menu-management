@@ -7,9 +7,11 @@ import { ROLE } from "../common/types";
 
 const AdminRoute: FC<{ children: ReactNode }> = ({ children }) => {
     const token = getIntoLocalStorage(TOKEN_KEY);
-    const { role }: { role: ROLE.Admin } = jwtDecode(token as string);
+    if (token) {
+        const { role }: { role: ROLE.Admin } = jwtDecode(token);
+        if (role == ROLE.Admin) return children;
+    }
 
-    if (role == ROLE.Admin) return children;
     return <Navigate to={"/lunch-menus"} />
 }
 

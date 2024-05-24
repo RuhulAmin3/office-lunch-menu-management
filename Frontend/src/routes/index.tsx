@@ -8,6 +8,7 @@ import NotFound from "../pages/NotFound";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import AdminRoute from "./AdminRoute";
+import AdminLayout from "../Layout/AdminLayout";
 
 export const router = createBrowserRouter([
     {
@@ -29,16 +30,23 @@ export const router = createBrowserRouter([
         </PublicRoute>
     },
     {
-        path: "/create-lunch-menu",
-        element: <AdminRoute><CreateLunchmenu /></AdminRoute>
-    },
-    {
-        path: "/select-menus",
-        element: <AdminRoute><SelectmenuList /></AdminRoute>
+        path: "/",
+        element: <AdminRoute>
+            <AdminLayout />
+        </AdminRoute>,
+        children: [
+            {
+                path: "/create-lunch-menu",
+                element: <CreateLunchmenu />
+            },
+            {
+                path: "/select-menus",
+                element: <SelectmenuList />
+            }
+        ]
     },
     {
         path: "*",
         element: <NotFound />
     }
-
 ])
