@@ -1,5 +1,5 @@
 
-import CreateMenu from '../features/lunch-menu/components/CreateLunchmenu'
+import CreateMenu from '../features/lunch-menu/components/CreateMenu'
 
 const CreateLunchmenu = () => {
     return (

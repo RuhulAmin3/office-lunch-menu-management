@@ -31,7 +31,6 @@ const FormDatePicker = ({
                 name={name}
                 control={control}
                 render={({ field }) => {
-                    console.log("value", field.value)
                     return <DatePicker
                         value={field.value ? dayjs(field.value) : dayjs(Date.now())}
                         size={size}
