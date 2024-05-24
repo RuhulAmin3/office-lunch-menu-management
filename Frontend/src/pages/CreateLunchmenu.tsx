@@ -1,7 +1,10 @@
+
+import CreateMenu from '../features/lunch-menu/components/CreateLunchmenu'
+
 const CreateLunchmenu = () => {
     return (
-        <div>CreateLunchmenu</div>
+        <CreateMenu />
     )
 }
 
-export default CreateLunchmenu;
+export default CreateLunchmenu

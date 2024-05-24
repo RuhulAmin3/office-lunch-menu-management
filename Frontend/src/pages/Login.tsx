@@ -25,7 +25,7 @@ const Login = () => {
 
     useEffect(() => {
         if (isSuccess && data) {
-            message.success("register successful")
+            message.success("login successful")
             navigate("/");
         }
 

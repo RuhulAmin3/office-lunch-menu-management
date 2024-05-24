@@ -10,7 +10,16 @@ export const lunchmenuApi = baseApi.injectEndpoints({
         contentType: "multipart/form-data",
       }),
     }),
+
+    getLunchmenus: builder.query({
+      query: (date) => ({
+        url: "lunch-menu",
+        method: "GET",
+        params: date,
+      }),
+    }),
   }),
 });
 
-export const { useCreateLunchmenuMutation } = lunchmenuApi;
+export const { useCreateLunchmenuMutation, useGetLunchmenusQuery } =
+  lunchmenuApi;

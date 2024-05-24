@@ -23,10 +23,8 @@ const FormInput = ({
     type,
     size = "large",
     value,
-    id,
     placeholder,
     disabled,
-    validation,
     label,
     required,
 }: IInput) => {
