@@ -29,6 +29,32 @@ const selectLunchMenu = async (payload: SelectMenu): Promise<SelectMenu> => {
   return result;
 };
 
+const deselectLunchMenu = async (
+  id: string,
+  userId: string
+): Promise<SelectMenu> => {
+  const isExist = await prisma.selectMenu.findFirst({
+    where: {
+      lunchMenuId: id,
+      userId,
+    },
+  });
+
+  if (!isExist)
+    throw new ErrorHandler(
+      httpStatus.NOT_FOUND,
+      "this lunch menu does not selected yet for you"
+    );
+
+  const result = await prisma.selectMenu.delete({
+    where: {
+      id: isExist.id,
+    },
+  });
+
+  return result;
+};
+
 const getAllSelectedLunchMenu = async (
   date: string,
   paginationOptions: { page: number; limit: number }
@@ -59,7 +85,20 @@ const getAllSelectedLunchMenu = async (
   return { result: allSelectedMenu, meta: { page, limit, total } };
 };
 
+const getSingleSelectMenu = async (id: string) => {
+  const result = await prisma.selectMenu.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!result)
+    throw new ErrorHandler(httpStatus.NOT_FOUND, "select menu not found");
+};
+
 export const selectMenuService = {
   getAllSelectedLunchMenu,
   selectLunchMenu,
+  getSingleSelectMenu,
+  deselectLunchMenu,
 };

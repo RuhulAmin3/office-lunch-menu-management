@@ -21,6 +21,26 @@ const createLunchMenu = async (
   }
 };
 
+const getSingleLunchMenu = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { id } = req.params;
+  try {
+    const result = await lunchMenuService.getSingleLunchMenu(id);
+
+    res.status(httpStatus.OK).json({
+      success: true,
+      message: "lunch menu retrieved successfully",
+      statusCode: httpStatus.OK,
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 const getAllLunchMenu = async (
   req: Request,
   res: Response,
@@ -75,4 +95,5 @@ export const lunchMenuController = {
   createLunchMenu,
   getAllLunchMenu,
   updateLunchMenu,
+  getSingleLunchMenu,
 };

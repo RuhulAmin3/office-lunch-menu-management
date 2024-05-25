@@ -31,6 +31,18 @@ const createLunchMenu = async (
   };
 };
 
+const getSingleLunchMenu = async (id: string): Promise<LunchMenu> => {
+  const result = await prisma.lunchMenu.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!result)
+    throw new ErrorHandler(httpStatus.NOT_FOUND, "lunch menu not found");
+  return result;
+};
+
 const getAllLunchMenu = async (
   date: string,
   paginationOptions: { page: number; limit: number }
@@ -84,4 +96,5 @@ export const lunchMenuService = {
   createLunchMenu,
   getAllLunchMenu,
   updateLunchMenu,
+  getSingleLunchMenu,
 };

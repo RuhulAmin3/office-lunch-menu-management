@@ -26,6 +26,12 @@ router.get(
   lunchMenuController.getAllLunchMenu
 );
 
+router.get(
+  "/:id",
+  authenticate(ROLE.Admin),
+  lunchMenuController.getSingleLunchMenu
+);
+
 router.patch(
   "/:id",
   authenticate(ROLE.Admin),
