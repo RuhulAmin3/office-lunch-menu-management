@@ -36,12 +36,12 @@ export const router = createBrowserRouter([
         </AdminRoute>,
         children: [
             {
-                path: "/create-lunch-menu",
-                element: <CreateLunchmenu />
-            },
-            {
                 path: "/select-menus",
                 element: <SelectmenuList />
+            },
+            {
+                path: "/create-lunch-menu",
+                element: <CreateLunchmenu />
             }
         ]
     },

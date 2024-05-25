@@ -4,7 +4,9 @@ const { Meta } = Card;
 
 const SelectmenuItem = ({ menu }: any) => {
     const { firstName, lastName, email } = menu?.user || {};
+
     const { title, image, description, date } = menu?.lunchMenu || {};
+
     return (
         <Card
             style={{ width: 300 }}

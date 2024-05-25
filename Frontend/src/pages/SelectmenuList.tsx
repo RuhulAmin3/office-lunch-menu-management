@@ -15,7 +15,7 @@ const SelectmenuList = () => {
             {isError && <p>{"something is wrong"}</p>}
             {data?.data?.length == 0 && <p>{"data not found"}</p>}
 
-            {data?.data?.length > 0 && <Flex gap={8}>
+            {data?.data?.length > 0 && <Flex gap={8} wrap={true}>
                 {data?.data?.map((menu: any) => (
                     <SelectmenuItem key={menu?.id} menu={menu} />
                 ))}

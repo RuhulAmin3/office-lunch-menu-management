@@ -8,7 +8,7 @@ import { useRegisterMutation } from "../features/auth/auth.api"
 import { useEffect } from "react"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { registerValidator } from "../features/auth/auth.validator"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 const Register = () => {
     const navigate = useNavigate();
@@ -71,6 +71,7 @@ const Register = () => {
                             >
                                 Register
                             </Button>
+                            <p style={{ color: "red", margin: "0 auto" }}> Already have an account? <Link to={"/login"}>Login</Link></p>
                         </Flex>
                     </Card>
                 </Form>

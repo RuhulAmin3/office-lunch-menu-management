@@ -2,7 +2,7 @@ import { Avatar, Button, Dropdown, Layout, MenuProps, Row, Space } from "antd";
 import { ROLE } from "../../common/types";
 import { useNavigate } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons";
-import { userLogout } from "../../features/auth/auth.service";
+import { getUserInfo, userLogout } from "../../features/auth/auth.service";
 
 const { Header: AntHeader } = Layout;
 
@@ -25,7 +25,7 @@ const Header = () => {
         },
     ];
 
-    const role = ROLE.Admin;
+    const { role } = getUserInfo();
 
     return (
         <AntHeader

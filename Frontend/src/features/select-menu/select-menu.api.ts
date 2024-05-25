@@ -10,6 +10,13 @@ export const selectmenuApi = baseApi.injectEndpoints({
       }),
     }),
 
+    deselectSelectmenu: builder.mutation({
+      query: ({ id, userId }) => ({
+        url: `select-menu/${id}`,
+        method: "DELETE",
+        params: { userId },
+      }),
+    }),
     getSelectmenus: builder.query({
       query: (date) => ({
         url: "select-menu",
@@ -19,5 +26,8 @@ export const selectmenuApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCreateSelectmenuMutation, useGetSelectmenusQuery } =
-  selectmenuApi;
+export const {
+  useCreateSelectmenuMutation,
+  useDeselectSelectmenuMutation,
+  useGetSelectmenusQuery,
+} = selectmenuApi;
