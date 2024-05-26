@@ -8,6 +8,7 @@ export const lunchmenuApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["lunch-menu"],
     }),
 
     getLunchmenus: builder.query({
@@ -16,6 +17,7 @@ export const lunchmenuApi = baseApi.injectEndpoints({
         method: "GET",
         params: date,
       }),
+      providesTags: ["lunch-menu"],
     }),
 
     uploadImages: builder.mutation({

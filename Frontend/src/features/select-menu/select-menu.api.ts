@@ -8,6 +8,7 @@ export const selectmenuApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["select-menu"],
     }),
 
     deselectSelectmenu: builder.mutation({
@@ -16,12 +17,15 @@ export const selectmenuApi = baseApi.injectEndpoints({
         method: "DELETE",
         params: { userId },
       }),
+      invalidatesTags: ["select-menu"],
     }),
+
     getSelectmenus: builder.query({
       query: (date) => ({
         url: "select-menu",
         params: date,
       }),
+      providesTags: ["select-menu"],
     }),
   }),
 });

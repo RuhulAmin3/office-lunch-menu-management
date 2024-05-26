@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Button, Card, Flex, message } from "antd"
 import Form from "../components/Forms/Form"
 import FormInput from "../components/Forms/FormInput"
@@ -33,7 +32,6 @@ const Login = () => {
             message.error((error as any)?.data?.message);
         }
     }, [data, isSuccess, isError, error])
-
 
     return (
         <div

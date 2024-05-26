@@ -1,18 +1,22 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Avatar, Button, Card, message } from "antd";
 
 import { useCreateSelectmenuMutation, useDeselectSelectmenuMutation } from "../../select-menu/select-menu.api";
 import { getUserInfo } from "../../auth/auth.service";
 import dayjs from "dayjs";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { deselectSelectLunchmenu, selectLunchmenu, setStoreToLocalStorage } from "../lunch-menu.slice";
 import { useAppDispatch, useAppSelector } from "../../../redux/hook";
+import { LunchMenuType } from "../types";
+import LunchMenuViewModal from "./LunchMenuViewModal";
+
 
 const { Meta } = Card;
 
-const LunchMenuItem = ({ menu }: any) => {
+const LunchMenuItem = ({ menu }: { menu: LunchMenuType }) => {
     const { image, title, description, date, id } = menu || {};
     const { userId } = getUserInfo();
+    const [isOpen, setIsOpen] = useState(false);
     const [createSelectmenu, { data, isSuccess, isLoading, isError, error }] = useCreateSelectmenuMutation();
     const [deselectSelectmenu, res] = useDeselectSelectmenuMutation();
 
@@ -65,31 +69,40 @@ const LunchMenuItem = ({ menu }: any) => {
 
 
     return (
-        <Card
-            cover={
-                <img
+        <>
+            <Card
+                cover={
+                    <img
+                        style={{
+                            height: "250px",
+                            objectFit: "cover"
+                        }}
+                        alt="image"
+                        src={image ? image : "https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"}
+                    />
+                }
+                actions={[
+                    menus?.includes(id) ?
+                        <Button onClick={handleDeselectSelectMenu} disabled={isLoading}>Deselect</Button> :
+                        <Button onClick={handleSelectMenu} disabled={res?.isLoading}>Select</Button>,
+                    <Button onClick={() => setIsOpen(true)}>View</Button>
+                ]}
+            >
 
-                    alt="image"
-                    src={"https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"}
+                <p>Lunch menu for <strong>
+                    {formattedDate}
+                </strong>
+                </p>
+
+                <Meta
+                    avatar={<Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />}
+                    title={title}
+                    description={description.split(" ").length < 2 ? description : description?.slice(0, 40) + " ..."}
+
                 />
-            }
-            actions={[
-                menus?.includes(id) ?
-                    <Button onClick={handleDeselectSelectMenu} disabled={isLoading}>Deselect</Button> :
-                    <Button onClick={handleSelectMenu} disabled={res?.isLoading}>Select</Button>,
-                <Button>View</Button>
-            ]}
-        >
-
-            <p style={{ textAlign: "right" }}>{formattedDate}</p>
-
-            <Meta
-                avatar={<Avatar src="https://api.dicebear.com/7.x/miniavs/svg?seed=8" />}
-                title={title}
-                description={description}
-
-            />
-        </Card>
+            </Card>
+            <LunchMenuViewModal menu={menu} isOpen={isOpen} setIsOpen={setIsOpen} />
+        </>
     )
 }
 

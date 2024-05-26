@@ -11,18 +11,19 @@ import { useNavigate } from "react-router-dom";
 import FormImageUpload from "../../../components/Forms/FormImageInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { createLunchMenuValidator } from "../lunch-menu.validator";
+import { fileType } from "../types";
 
 const CreateMenu = () => {
-    const [imageFile, setImageFile] = useState();
+    const [imageFile, setImageFile] = useState<fileType>();
     const [createLunchmenu, { data, isLoading, isSuccess, isError, error }] = useCreateLunchmenuMutation();
     const [uploadImages] = useUploadImagesMutation();
     const navigate = useNavigate();
 
-    const handleImage = async (pics) => {
+    const handleImage = async (pics: fileType) => {
         if (pics) {
             if (pics.type === "image/jpeg" || pics.type === "image/png") {
                 const data = new FormData();
-                data.append("file", pics);
+                data.append("file", pics as unknown as Blob);
                 data.append("upload_preset", "poco-site");
                 data.append("cloud_name", "online-poco");
                 return uploadImages(data);
@@ -30,13 +31,16 @@ const CreateMenu = () => {
         } else {
             message.warning("upload your image first");
             return;
-
         }
     };
 
-
     const onSubmit: SubmitHandler<any> = async (data: any) => {
         try {
+            if (!imageFile) {
+                message.warning("upload your image first");
+                return;
+            }
+
             const fileInfo = await handleImage(imageFile);
             if (fileInfo?.data?.secure_url) {
                 data["image"] = fileInfo?.data?.secure_url;
@@ -56,6 +60,7 @@ const CreateMenu = () => {
         if (isError) {
             message.error((error as any)?.data?.message);
         }
+
     }, [data, isSuccess, isError, error, navigate])
 
     return (
@@ -63,7 +68,6 @@ const CreateMenu = () => {
             <Card style={{ maxWidth: "600px", width: "100%", marginInline: "auto" }}>
                 <Flex vertical gap="large">
                     <FormImageUpload setImageFile={setImageFile} name="image" label="Upload Image" accept=".jpg,.jpeg,.png" />
-
                     <FormInput name="title" label="Title" required placeholder="Enter Your Lunch title" type="text" />
 
                     <FormDatePicker required name="date" label="Select Lunch Menu date" />

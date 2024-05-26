@@ -1,12 +1,11 @@
 import { Avatar, Button, Dropdown, Layout, MenuProps, Row, Space } from "antd";
-import { ROLE } from "../../common/types";
 import { useNavigate } from "react-router-dom";
 import { UserOutlined } from "@ant-design/icons";
 import { getUserInfo, userLogout } from "../../features/auth/auth.service";
 
 const { Header: AntHeader } = Layout;
 
-const Header = () => {
+const Header = ({ background }: { background?: string }) => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -30,7 +29,8 @@ const Header = () => {
     return (
         <AntHeader
             style={{
-                background: "#fff"
+                background: background ? background : "#fff",
+                boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px"
             }}
         >
             <Row
@@ -53,7 +53,7 @@ const Header = () => {
                     </Space>
                 </Dropdown>
             </Row>
-        </AntHeader>
+        </AntHeader >
     );
 };
 
