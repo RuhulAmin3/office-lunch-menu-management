@@ -27,6 +27,8 @@ const CreateMenu = () => {
                 data.append("upload_preset", "poco-site");
                 data.append("cloud_name", "online-poco");
                 return uploadImages(data);
+            } else {
+                message.warning("image must be in jpeg or png format")
             }
         } else {
             message.warning("upload your image first");

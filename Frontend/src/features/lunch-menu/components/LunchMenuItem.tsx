@@ -83,8 +83,8 @@ const LunchMenuItem = ({ menu }: { menu: LunchMenuType }) => {
                 }
                 actions={[
                     menus?.includes(id) ?
-                        <Button onClick={handleDeselectSelectMenu} disabled={isLoading}>Deselect</Button> :
-                        <Button onClick={handleSelectMenu} disabled={res?.isLoading}>Select</Button>,
+                        <Button onClick={handleDeselectSelectMenu} disabled={isLoading}>{isLoading ? "Deselecting" : "Deselect"}</Button> :
+                        <Button onClick={handleSelectMenu} disabled={res?.isLoading}>{res?.isLoading ? "Selecting" : "Select"}</Button>,
                     <Button onClick={() => setIsOpen(true)}>View</Button>
                 ]}
             >
