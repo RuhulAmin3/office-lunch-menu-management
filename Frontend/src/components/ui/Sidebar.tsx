@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Layout, Menu } from "antd";
 import { Link } from "react-router-dom";
-import { ProfileOutlined } from "@ant-design/icons";
+import { PlusOutlined, UnorderedListOutlined } from "@ant-design/icons";
 
 const { Sider } = Layout;
 
@@ -9,14 +9,14 @@ const SideBar = () => {
     const [collapsed, setCollapsed] = useState(false);
     const sidebarItems = [
         {
-            label: <Link to="/create-lunch-menu">Create Lunch Menu</Link>,
+            label: <Link to="/create-lunch-menu">Add Lunch Menu</Link>,
             key: `create-lunch-menu`,
-            icon: <ProfileOutlined />,
+            icon: <PlusOutlined />,
         },
         {
-            label: <Link to="/select-menus">Select Menus</Link>,
+            label: <Link to="/">Select Menus</Link>,
             key: `select-menus`,
-            icon: <ProfileOutlined />,
+            icon: <UnorderedListOutlined />,
         },
     ]
     return (

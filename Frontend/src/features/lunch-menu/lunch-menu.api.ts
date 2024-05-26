@@ -7,7 +7,6 @@ export const lunchmenuApi = baseApi.injectEndpoints({
         url: "lunch-menu",
         method: "POST",
         body: data,
-        contentType: "multipart/form-data",
       }),
     }),
 
@@ -18,8 +17,19 @@ export const lunchmenuApi = baseApi.injectEndpoints({
         params: date,
       }),
     }),
+
+    uploadImages: builder.mutation({
+      query: (images) => ({
+        url: `https://api.cloudinary.com/v1_1/online-poco/image/upload`,
+        method: "POST",
+        body: images,
+      }),
+    }),
   }),
 });
 
-export const { useCreateLunchmenuMutation, useGetLunchmenusQuery } =
-  lunchmenuApi;
+export const {
+  useCreateLunchmenuMutation,
+  useGetLunchmenusQuery,
+  useUploadImagesMutation,
+} = lunchmenuApi;

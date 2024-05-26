@@ -49,7 +49,7 @@ const LunchMenuItem = ({ menu }: any) => {
 
     useEffect(() => {
         if (res?.isSuccess) {
-            message.success("Lunch menu deselected successfully");
+            message.warning("Lunch menu deselected successfully");
             dispatch(deselectSelectLunchmenu(id));
         }
 

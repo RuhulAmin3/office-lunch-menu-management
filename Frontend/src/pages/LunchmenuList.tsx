@@ -14,7 +14,13 @@ const LunchmenuList = () => {
         <>
             {isLoading && <Loader />}
             {isError && <p>{"something is wrong"}</p>}
-            {data?.data?.length == 0 && <p>{"data not found"}</p>}
+            {
+                data?.data?.length == 0 &&
+                <>
+                    <Header />
+                    <p>{"data not found"}</p>
+                </>
+            }
             {data?.data?.length > 0 && <>
                 <Header />
                 <div style={{ width: "90vw", marginInline: "auto" }}>

@@ -6,10 +6,12 @@ export const baseApi = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
     baseUrl: import.meta.env.VITE_API_URL,
-    prepareHeaders: async (headers) => {
+    prepareHeaders: async (headers, endpoints) => {
       const token = getIntoLocalStorage(TOKEN_KEY);
-      if (token) {
-        headers.set("authorization", `Bearer ${token}`);
+      if (endpoints?.endpoint !== "uploadImages") {
+        if (token) {
+          headers.set("authorization", `Bearer ${token}`);
+        }
       }
       return headers;
     },

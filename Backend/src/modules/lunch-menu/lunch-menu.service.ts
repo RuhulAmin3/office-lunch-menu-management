@@ -2,19 +2,10 @@ import { LunchMenu } from "@prisma/client";
 import { prisma } from "../../common/prisma";
 import { ErrorHandler } from "../../common/errors";
 import httpStatus from "http-status";
-import { ImageUploader } from "../../common/uploader";
-import { IUploadedFile } from "../../common/types";
 
 const createLunchMenu = async (
-  payload: LunchMenu,
-  file: Express.Multer.File
+  payload: LunchMenu
 ): Promise<{ result: LunchMenu }> => {
-  const imageUrl: IUploadedFile = (await ImageUploader.uploadToCloudinary(
-    file
-  )) as IUploadedFile;
-
-  payload.image = imageUrl.secure_url;
-
   const create = await prisma.lunchMenu.create({
     data: payload,
   });

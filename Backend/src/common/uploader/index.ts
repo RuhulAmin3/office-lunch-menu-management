@@ -22,6 +22,7 @@ cloudinary.config({
 });
 
 const uploadToCloudinary = async (file: Express.Multer.File) => {
+  // console.log("file", file);
   return new Promise((resolve, reject) => {
     cloudinary.uploader.upload(file.path, function (error, result) {
       fs.unlinkSync(file.path);

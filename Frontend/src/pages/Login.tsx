@@ -68,7 +68,7 @@ const Login = () => {
                             >
                                 Login
                             </Button>
-                            <p style={{ color: "red", margin: "0 auto" }}> don't have an account? <Link to={"/register"}>Register</Link></p>
+                            <p style={{ color: "gray", margin: "0 auto" }}> don't have an account? <Link to={"/register"}>Register</Link></p>
                         </Flex>
                     </Card>
                 </Form>

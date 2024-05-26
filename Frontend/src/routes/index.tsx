@@ -36,7 +36,7 @@ export const router = createBrowserRouter([
         </AdminRoute>,
         children: [
             {
-                path: "/select-menus",
+                index: true,
                 element: <SelectmenuList />
             },
             {

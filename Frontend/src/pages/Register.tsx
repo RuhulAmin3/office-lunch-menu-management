@@ -71,7 +71,7 @@ const Register = () => {
                             >
                                 Register
                             </Button>
-                            <p style={{ color: "red", margin: "0 auto" }}> Already have an account? <Link to={"/login"}>Login</Link></p>
+                            <p style={{ color: "gray", margin: "0 auto" }}> Already have an account? <Link to={"/login"}>Login</Link></p>
                         </Flex>
                     </Card>
                 </Form>

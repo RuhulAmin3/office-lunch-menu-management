@@ -1,15 +1,23 @@
 import { z } from "zod";
 
 const createLunchMenuSchema = z.object({
-  title: z.string({
-    required_error: "title is required",
+  body: z.object({
+    title: z.string({
+      required_error: "title is required",
+    }),
+
+    description: z.string().optional(),
+
+    image: z.string({
+      required_error: "image url is required",
+    }),
+
+    date: z
+      .string({
+        required_error: "date is required",
+      })
+      .transform((str) => new Date(str)),
   }),
-  description: z.string().optional(),
-  date: z
-    .string({
-      required_error: "date is required",
-    })
-    .transform((str) => new Date(str)),
 });
 
 const updateLunchMenuSchema = z.object({
