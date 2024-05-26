@@ -65,6 +65,7 @@ const login = async (payload: {
     payload.password,
     isUserExist.password
   );
+
   if (!isPasswordMatched) {
     throw new ErrorHandler(httpStatus.UNAUTHORIZED, "wrong credientials");
   }

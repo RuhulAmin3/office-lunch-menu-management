@@ -8,13 +8,33 @@ const createLunchMenu = async (
   next: NextFunction
 ) => {
   try {
-    const result = await lunchMenuService.createLunchMenu(req.body, req.file!);
+    const result = await lunchMenuService.createLunchMenu(req.body);
 
     res.status(httpStatus.CREATED).json({
       success: true,
       message: "lunch menu created successfully",
       statusCode: httpStatus.CREATED,
       data: result.result,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getSingleLunchMenu = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { id } = req.params;
+  try {
+    const result = await lunchMenuService.getSingleLunchMenu(id);
+
+    res.status(httpStatus.OK).json({
+      success: true,
+      message: "lunch menu retrieved successfully",
+      statusCode: httpStatus.OK,
+      data: result,
     });
   } catch (err) {
     next(err);
@@ -75,4 +95,5 @@ export const lunchMenuController = {
   createLunchMenu,
   getAllLunchMenu,
   updateLunchMenu,
+  getSingleLunchMenu,
 };

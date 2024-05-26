@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Button, Card, Flex, message } from "antd"
 import Form from "../components/Forms/Form"
 import FormInput from "../components/Forms/FormInput"
@@ -7,9 +7,10 @@ import { useLoginMutation } from "../features/auth/auth.api"
 import { useEffect } from "react"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { loginValidator } from "../features/auth/auth.validator"
+import { Link, useNavigate } from "react-router-dom"
 
 const Login = () => {
-
+    const navigate = useNavigate();
     const [login, { data, isLoading, isSuccess, isError, error }] =
         useLoginMutation();
 
@@ -23,14 +24,14 @@ const Login = () => {
 
     useEffect(() => {
         if (isSuccess && data) {
-            message.success("register successful")
+            message.success("login successful")
+            navigate("/");
         }
+
         if (isError) {
-            console.log("error", error);
             message.error((error as any)?.data?.message);
         }
     }, [data, isSuccess, isError, error])
-
 
     return (
         <div
@@ -65,6 +66,7 @@ const Login = () => {
                             >
                                 Login
                             </Button>
+                            <p style={{ color: "gray", margin: "0 auto" }}> don't have an account? <Link to={"/register"}>Register</Link></p>
                         </Flex>
                     </Card>
                 </Form>

@@ -19,4 +19,16 @@ router.get(
   seletMenuController.getAllSelectedLunchMenu
 );
 
+router.get(
+  "/:id",
+  authenticate(ROLE.Admin),
+  seletMenuController.getSingleSelectMenu
+);
+
+router.delete(
+  "/:id",
+  authenticate(ROLE.Employee),
+  seletMenuController.deselectLunchMenu
+);
+
 export const selectMenuRouter = router;

@@ -2,19 +2,10 @@ import { LunchMenu } from "@prisma/client";
 import { prisma } from "../../common/prisma";
 import { ErrorHandler } from "../../common/errors";
 import httpStatus from "http-status";
-import { ImageUploader } from "../../common/uploader";
-import { IUploadedFile } from "../../common/types";
 
 const createLunchMenu = async (
-  payload: LunchMenu,
-  file: Express.Multer.File
+  payload: LunchMenu
 ): Promise<{ result: LunchMenu }> => {
-  const imageUrl: IUploadedFile = (await ImageUploader.uploadToCloudinary(
-    file
-  )) as IUploadedFile;
-
-  payload.image = imageUrl.secure_url;
-
   const create = await prisma.lunchMenu.create({
     data: payload,
   });
@@ -29,6 +20,18 @@ const createLunchMenu = async (
   return {
     result: create,
   };
+};
+
+const getSingleLunchMenu = async (id: string): Promise<LunchMenu> => {
+  const result = await prisma.lunchMenu.findUnique({
+    where: {
+      id,
+    },
+  });
+
+  if (!result)
+    throw new ErrorHandler(httpStatus.NOT_FOUND, "lunch menu not found");
+  return result;
 };
 
 const getAllLunchMenu = async (
@@ -84,4 +87,5 @@ export const lunchMenuService = {
   createLunchMenu,
   getAllLunchMenu,
   updateLunchMenu,
+  getSingleLunchMenu,
 };

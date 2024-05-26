@@ -20,6 +20,50 @@ const selectLunchMenu = async (
     next(err);
   }
 };
+const deselectLunchMenu = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { userId } = req.query;
+    const { id } = req.params;
+
+    const result = await selectMenuService.deselectLunchMenu(
+      id,
+      userId as string
+    );
+
+    res.status(httpStatus.OK).json({
+      success: true,
+      message: "lunch menu deselected successfully",
+      statusCode: httpStatus.OK,
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
+const getSingleSelectMenu = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { id } = req.params;
+  try {
+    const result = await selectMenuService.getSingleSelectMenu(id);
+
+    res.status(httpStatus.OK).json({
+      success: true,
+      message: "select lunch menu retrived successfully",
+      statusCode: httpStatus.OK,
+      data: result,
+    });
+  } catch (err) {
+    next(err);
+  }
+};
 
 const getAllSelectedLunchMenu = async (
   req: Request,
@@ -54,4 +98,6 @@ const getAllSelectedLunchMenu = async (
 export const seletMenuController = {
   getAllSelectedLunchMenu,
   selectLunchMenu,
+  getSingleSelectMenu,
+  deselectLunchMenu,
 };

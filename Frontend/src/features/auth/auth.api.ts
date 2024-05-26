@@ -1,5 +1,5 @@
 import { setIntoLocalStorage } from "../../common/utils";
-import { TOKEN_KEY } from "../../common/utils/constants";
+import { TOKEN_KEY } from "../../common/constants";
 import { baseApi } from "../../redux/baseApi";
 
 export const authApi = baseApi.injectEndpoints({

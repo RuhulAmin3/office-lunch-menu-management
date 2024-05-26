@@ -1,3 +1,6 @@
 /Backend/node_modules
 /Frontend/node_modules
 .env
+
+/Backend/dist
+/Backend/.vercel
